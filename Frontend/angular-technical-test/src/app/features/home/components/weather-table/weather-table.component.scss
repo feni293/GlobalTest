@@ -1,0 +1,30 @@
+.weather-table {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .weather-table {
+    min-width: 600px;
+  }
+}
+
+.weather-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.weather-table {
+  width: 100%;
+  min-width: 600px;
+}
