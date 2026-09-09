@@ -14,6 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Frontend/angular-technical-test
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,6 +27,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: Frontend/angular-technical-test/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -40,7 +45,7 @@ jobs:
           EOF
 
       - name: Build
-        run: npm run build -- --base-href /angular-technical-test/
+        run: npm run build -- --base-href /GlobalTest/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -48,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/angular-technical-test/browser
+          path: Frontend/angular-technical-test/dist/angular-technical-test/browser
 
       - name: Deploy
         id: deployment
