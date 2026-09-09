@@ -1,0 +1,16 @@
+CREATE DATABASE DBClientes;
+GO
+
+USE DBClientes;
+GO
+
+CREATE TABLE Customers
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Identification VARCHAR(20) NOT NULL UNIQUE,
+    FirstName VARCHAR(100) NOT NULL,
+    LastName VARCHAR(100) NOT NULL,
+    Email VARCHAR(150) NULL,
+    Phone VARCHAR(20) NULL
+);
+GO
