@@ -1,0 +1,111 @@
+<div class="home-container">
+
+  <header class="page-header">
+    <h1>Movies & Weather</h1>
+    <p>Explore popular movies and current weather conditions.</p>
+  </header>
+
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+
+    <!-- MOVIES -->
+    <mat-tab label="Movies">
+
+      <div class="tab-content">
+
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search movies</mat-label>
+
+          <input
+            matInput
+            [formControl]="searchControl"
+            placeholder="Enter a movie name"
+          />
+        </mat-form-field>
+
+        @if (isMoviesLoading) {
+
+          <div class="loading-container">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+
+        } @else if (moviesError) {
+
+            <div class="error-message">
+                <p>{{ moviesError }}</p>
+                <button mat-raised-button color="primary" (click)="onPageChange(1)">
+                    Try again
+                </button>
+            </div>
+
+        } @else if (movies.length === 0) {
+
+          <div class="empty-message">
+            No movies found.
+          </div>
+
+        } @else {
+
+          <app-movies-table
+            [movies]="movies"
+            [totalMovies]="totalMovies"
+            (pageChange)="onPageChange($event)"
+          />
+
+        }
+
+      </div>
+
+    </mat-tab>
+
+
+    <!-- WEATHER -->
+    <mat-tab label="Weather">
+
+      <div class="tab-content">
+
+        <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search city</mat-label>
+
+        <input
+            matInput
+            [formControl]="weatherSearchControl"
+            placeholder="Enter a city name"
+        />
+        </mat-form-field>
+
+        @if (isWeatherLoading) {
+
+          <div class="loading-container">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+
+        } @else if (weatherError) {
+
+            <div class="error-message">
+                <p>{{ weatherError }}</p>
+                <button mat-raised-button color="primary" (click)="retryWeather()">
+                    Try again
+                </button>
+            </div>
+
+        } @else if (weather.length === 0) {
+
+          <div class="empty-message">
+            No weather data available.
+          </div>
+
+        } @else {
+
+          <app-weather-table
+            [weather]="filteredWeather"
+            />
+
+        }
+
+      </div>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>
